@@ -32,7 +32,6 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     orientation: 'portrait',
     icon,
     userInterfaceStyle: 'automatic',
-    newArchEnabled: true,
     backgroundColor: '#000000',
     runtimeVersion: {
       policy: 'nativeVersion',
@@ -54,8 +53,6 @@ export default ({ config }: ConfigContext): ExpoConfig => {
         foregroundImage: adaptiveIcon,
         backgroundColor: '#ffffff',
       },
-      edgeToEdgeEnabled: true,
-      predictiveBackGestureEnabled: false,
       package: packageName,
     },
     web: {
@@ -82,6 +79,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
         },
       ],
       'expo-web-browser',
+      'expo-secure-store',
     ],
     experiments: {
       typedRoutes: true,
