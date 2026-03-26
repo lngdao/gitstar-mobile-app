@@ -1,0 +1,93 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+default_platform(:android)
+
+platform :android do
+  desc "Build Android app for staging environment"
+  lane :staging do
+    gradle(
+      task: "assemble",
+      flavor: "staging",
+      build_type: "Release",
+      project_dir: "./"
+    )
+  end
+
+  desc "Build Android app for production environment"
+  lane :production do
+    increment_version_code(
+      gradle_file_path: "app/build.gradle"
+    )
+
+    gradle(
+      task: "assemble",
+      flavor: "production",
+      build_type: "Release",
+      project_dir: "./"
+    )
+  end
+
+  desc "Build and upload production to Play Store Beta"
+  lane :beta do
+    production
+
+    upload_to_play_store(
+      track: "internal",
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+      aab: "./app/build/outputs/bundle/productionRelease/app-production-release.aab"
+    )
+  end
+
+  desc "Build and upload to Play Store Production"
+  lane :release do
+    production
+
+    upload_to_play_store(
+      track: "production",
+      skip_upload_metadata: false,
+      skip_upload_images: false,
+      skip_upload_screenshots: false,
+      aab: "./app/build/outputs/bundle/productionRelease/app-production-release.aab"
+    )
+  end
+
+  desc "Build AAB (Android App Bundle) for production"
+  lane :bundle do
+    gradle(
+      task: "bundle",
+      flavor: "production",
+      build_type: "Release",
+      project_dir: "./"
+    )
+  end
+
+  desc "Run tests"
+  lane :test do
+    gradle(
+      task: "test",
+      flavor: "production",
+      build_type: "Release",
+      project_dir: "./"
+    )
+  end
+
+  desc "Clean build"
+  lane :clean do
+    gradle(
+      task: "clean",
+      project_dir: "./"
+    )
+  end
+end

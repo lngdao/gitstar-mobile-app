@@ -1,0 +1,17 @@
+{
+  "name": "@expo-boilerplate/config-plugins",
+  "version": "1.0.0",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "dependencies": {
+    "expo": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "expo-module-scripts": "^3.0.0",
+    "typescript": "^5.0.0"
+  }
+}

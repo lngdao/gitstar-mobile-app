@@ -1,0 +1,16 @@
+[install]
+# Equivalent to npm's legacy-peer-deps
+peer = true
+
+# Use exact versions from package.json
+exact = false
+
+# Install optional dependencies
+optional = true
+
+# Production only mode
+production = false
+
+[install.cache]
+# Enable caching for faster installs
+disable = false

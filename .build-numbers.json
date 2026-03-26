@@ -1,0 +1,8 @@
+{
+  "phase1": {
+    "version": "1.0.0",
+    "development": 1,
+    "preview": 1,
+    "production": 1
+  }
+}
