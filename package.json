@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "entrypoint.js",
   "scripts": {
+    "postinstall": "cd plugins && bun run build",
     "start": "expo start",
     "dev": "APP_VARIANT=development expo start",
     "preview": "APP_VARIANT=preview expo start",
