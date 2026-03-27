@@ -16,8 +16,9 @@ export default {
   },
   navigation: {
     home: 'Trang chủ',
-    explore: 'Khám phá',
-    profile: 'Hồ sơ',
+    trending: 'Xu hướng',
+    notifications: 'Thông báo',
+    bookmarks: 'Dấu trang',
     settings: 'Cài đặt',
   },
 };

@@ -16,8 +16,9 @@ export default {
   },
   navigation: {
     home: 'Home',
-    explore: 'Explore',
-    profile: 'Profile',
+    trending: 'Trending',
+    notifications: 'Notifications',
+    bookmarks: 'Bookmarks',
     settings: 'Settings',
   },
 };

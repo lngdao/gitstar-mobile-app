@@ -35,30 +35,40 @@ export default function TabsLayout() {
         name="home"
         options={{
           title: t('navigation.home'),
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home-outline" size={size} color={color} />
+          tabBarIcon: ({ color, size, focused }) => (
+            <Ionicons name={focused ? 'home' : 'home-outline'} size={size} color={color} />
           ),
           tabBarButton: (props) => <HapticTabButton {...props} routeName="home" />,
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="trending"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="compass-outline" size={size} color={color} />
+          title: t('navigation.trending'),
+          tabBarIcon: ({ color, size, focused }) => (
+            <Ionicons name={focused ? 'flame' : 'flame-outline'} size={size} color={color} />
           ),
-          tabBarButton: (props) => <HapticTabButton {...props} routeName="explore" />,
+          tabBarButton: (props) => <HapticTabButton {...props} routeName="trending" />,
         }}
       />
       <Tabs.Screen
-        name="profile"
+        name="notifications"
         options={{
-          title: 'Profile',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person-outline" size={size} color={color} />
+          title: t('navigation.notifications'),
+          tabBarIcon: ({ color, size, focused }) => (
+            <Ionicons name={focused ? 'notifications' : 'notifications-outline'} size={size} color={color} />
           ),
-          tabBarButton: (props) => <HapticTabButton {...props} routeName="profile" />,
+          tabBarButton: (props) => <HapticTabButton {...props} routeName="notifications" />,
+        }}
+      />
+      <Tabs.Screen
+        name="bookmarks"
+        options={{
+          title: t('navigation.bookmarks'),
+          tabBarIcon: ({ color, size, focused }) => (
+            <Ionicons name={focused ? 'bookmark' : 'bookmark-outline'} size={size} color={color} />
+          ),
+          tabBarButton: (props) => <HapticTabButton {...props} routeName="bookmarks" />,
         }}
       />
     </Tabs>

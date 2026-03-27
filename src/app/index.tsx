@@ -1,17 +1,20 @@
-import { Box, Text } from '@/shared/components';
+import { useState, useCallback } from 'react';
+import { View } from 'react-native';
 import { useRouter } from 'expo-router';
-import { useEffect } from 'react';
+import { SplashOverlay } from '@/features/splash';
 
 export default function IndexScreen() {
   const router = useRouter();
-  useEffect(() => {
-    const timer = setTimeout(() => { router.replace('/(tabs)/home'); }, 1000);
-    return () => clearTimeout(timer);
+  const [isSplashVisible, setIsSplashVisible] = useState(true);
+
+  const handleSplashFinish = useCallback(() => {
+    setIsSplashVisible(false);
+    router.replace('/(tabs)/home');
   }, [router]);
 
   return (
-    <Box bg="primary" className="flex-1 items-center justify-center">
-      <Text variant="heading" color="primary">Welcome</Text>
-    </Box>
+    <View style={{ flex: 1, backgroundColor: '#B6573A' }}>
+      {isSplashVisible && <SplashOverlay onFinish={handleSplashFinish} />}
+    </View>
   );
 }

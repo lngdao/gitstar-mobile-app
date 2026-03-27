@@ -72,25 +72,55 @@ const withCustomNativeConfig: ConfigPlugin = (config) => {
 
   // Add use_modular_headers! to Podfile for Firebase compatibility
   config = withPodfile(config, (config) => {
-    const { contents } = config.modResults;
+    let { contents } = config.modResults;
 
     // Check if use_modular_headers! is already added
-    if (contents.includes('use_modular_headers!')) {
-      return config;
+    if (!contents.includes('use_modular_headers!')) {
+      // Find target block and add use_modular_headers! after use_expo_modules!
+      const targetRegex = /(target\s+['"][^'"]+['"]\s+do\s*\n\s*use_expo_modules!)/;
+
+      if (targetRegex.test(contents)) {
+        contents = contents.replace(
+          targetRegex,
+          `$1\n  use_modular_headers!`
+        );
+      } else {
+        console.warn('⚠️ Could not find target block to add use_modular_headers!');
+      }
     }
 
-    // Find target block and add use_modular_headers! after use_expo_modules!
-    const targetRegex = /(target\s+['"][^'"]+['"]\s+do\s*\n\s*use_expo_modules!)/;
+    // Fix Xcode 26.4 compatibility
+    if (!contents.includes('FMT_USE_CONSTEVAL')) {
+      const xcode26Fix = [
+        '',
+        '    # Fix Xcode 26 — disable explicit modules',
+        '    installer.pods_project.targets.each do |target|',
+        '      target.build_configurations.each do |bc|',
+        "        bc.build_settings['SWIFT_ENABLE_EXPLICIT_MODULES'] = 'NO'",
+        '      end',
+        '    end',
+        '',
+        '    # Fix Xcode 26.4 — patch fmt consteval issue',
+        "    fmt_base = File.join(installer.sandbox.pod_dir('fmt'), 'include', 'fmt', 'base.h')",
+        '    if File.exist?(fmt_base)',
+        '      File.chmod(0644, fmt_base)',
+        '      content = File.read(fmt_base)',
+        "      patched = content.gsub(/#\\s*define FMT_USE_CONSTEVAL 1/, '# define FMT_USE_CONSTEVAL 0')",
+        '      if patched != content',
+        '        File.write(fmt_base, patched)',
+        "        puts '✅ Patched fmt/base.h: disabled FMT_USE_CONSTEVAL for Xcode 26.4'",
+        '      end',
+        '    end',
+      ].join('\n');
 
-    if (targetRegex.test(contents)) {
-      config.modResults.contents = contents.replace(
-        targetRegex,
-        `$1\n  use_modular_headers!`
+      // Insert before the closing `end` of post_install block
+      contents = contents.replace(
+        /(post_install\s+do\s+\|installer\|[\s\S]*?)(^\s+end\s*$)/m,
+        `$1${xcode26Fix}\n$2`
       );
-    } else {
-      console.warn('⚠️ Could not find target block to add use_modular_headers!');
     }
 
+    config.modResults.contents = contents;
     return config;
   });
 

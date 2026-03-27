@@ -6,12 +6,12 @@ const EAS_PROJECT_ID = 'your-eas-project-id';
 const PROJECT_SLUG = 'expo-boilerplate';
 
 // App Production Config
-const APP_NAME = 'My App';
-const BUNDLE_IDENTIFIER = 'com.example.myapp';
-const PACKAGE_NAME = 'com.example.myapp';
+const APP_NAME = 'GitStar - Top Repositories';
+const BUNDLE_IDENTIFIER = 'com.gitstar';
+const PACKAGE_NAME = 'com.gitstar';
 const ICON = './assets/images/icon.png';
 const ADAPTIVE_ICON = './assets/images/icon.png';
-const SCHEME = 'myapp';
+const SCHEME = 'gitstar';
 
 export default ({ config }: ConfigContext): ExpoConfig => {
   const appEnv = (process.env.APP_VARIANT || 'development') as
@@ -35,13 +35,6 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     backgroundColor: '#000000',
     runtimeVersion: {
       policy: 'nativeVersion',
-    },
-    updates: {
-      url: `https://u.expo.dev/${EAS_PROJECT_ID}`,
-      enabled: true,
-      requestHeaders: {
-        'expo-channel-name': channel,
-      },
     },
     ios: {
       supportsTablet: false,
