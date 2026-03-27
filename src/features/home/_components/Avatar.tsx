@@ -1,4 +1,5 @@
 import { Text } from '@/shared/components';
+import { Image as ExpoImage } from 'expo-image';
 import { View } from 'react-native';
 
 const AVATAR_COLORS = ['#3B82F6', '#8B5CF6', '#22C55E', '#F97316', '#EC4899', '#14B8A6', '#6366F1'];
@@ -14,13 +15,29 @@ function getAvatarColor(login: string): string {
 
 interface AvatarProps {
   login: string;
+  avatarUrl?: string | null;
   size?: number;
 }
 
-export const Avatar = ({ login, size = 38 }: AvatarProps) => {
+export const Avatar = ({ login, avatarUrl, size = 38 }: AvatarProps) => {
   const backgroundColor = getAvatarColor(login);
   const initial = login.charAt(0).toUpperCase();
   const fontSize = size * 0.4;
+
+  if (avatarUrl) {
+    return (
+      <ExpoImage
+        source={{ uri: avatarUrl }}
+        style={{
+          width: size,
+          height: size,
+          borderRadius: size / 2,
+        }}
+        contentFit="cover"
+        transition={200}
+      />
+    );
+  }
 
   return (
     <View

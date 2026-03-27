@@ -15,7 +15,7 @@ interface EventTypeBadgeProps {
 }
 
 export const EventTypeBadge = ({ type }: EventTypeBadgeProps) => {
-  const config = EVENT_CONFIG[type];
+  const config = EVENT_CONFIG[type] ?? { icon: 'code-slash' as keyof typeof Ionicons.glyphMap, color: '#A1A1A1', label: type };
 
   return (
     <View
