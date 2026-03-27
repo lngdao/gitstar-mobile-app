@@ -43,9 +43,10 @@ const TabItem = ({ tabKey, label, isActive, onPress }: TabItemProps) => {
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={0.7}
-      className="flex-1 items-center py-14"
+      className="flex-1 items-center"
+      style={{ paddingVertical: 12 }}
     >
-      <View className="flex-row items-center gap-5">
+      <View className="flex-row items-center" style={{ gap: 4 }}>
         {tabKey === 'agents' && (
           <Ionicons name="hardware-chip" size={13} color={isActive ? '#FAFAFA' : '#A1A1A1'} />
         )}
@@ -58,8 +59,8 @@ const TabItem = ({ tabKey, label, isActive, onPress }: TabItemProps) => {
         </Text>
       </View>
       <Animated.View
-        style={[indicatorStyle]}
-        className="absolute bottom-0 h-[3px] w-48 rounded-xs bg-bg-brand"
+        style={[indicatorStyle, { width: 40 }]}
+        className="absolute bottom-0 h-[3px] rounded-xs bg-bg-brand"
       />
     </TouchableOpacity>
   );

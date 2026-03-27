@@ -19,8 +19,15 @@ export const EventTypeBadge = ({ type }: EventTypeBadgeProps) => {
 
   return (
     <View
-      style={{ backgroundColor: config.color + '1A' }}
-      className="flex-row items-center gap-3 rounded-sm px-7 py-3"
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 3,
+        paddingHorizontal: 7,
+        paddingVertical: 3,
+        backgroundColor: config.color + '1A',
+        borderRadius: 5,
+      }}
     >
       <Ionicons name={config.icon} size={10} color={config.color} />
       <Text style={{ color: config.color, fontSize: 11, fontWeight: '500' }}>

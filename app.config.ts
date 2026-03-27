@@ -6,7 +6,7 @@ const EAS_PROJECT_ID = 'your-eas-project-id';
 const PROJECT_SLUG = 'expo-boilerplate';
 
 // App Production Config
-const APP_NAME = 'GitStar - Top Repositories';
+const APP_NAME = 'GitStar';
 const BUNDLE_IDENTIFIER = 'com.gitstar';
 const PACKAGE_NAME = 'com.gitstar';
 const ICON = './assets/images/icon.png';
@@ -72,7 +72,15 @@ export default ({ config }: ConfigContext): ExpoConfig => {
         },
       ],
       'expo-web-browser',
-      'expo-secure-store',
+      [
+        'expo-build-properties',
+        {
+          buildReactNativeFromSource: true,
+          ios: {
+            useFrameworks: 'static',
+          },
+        },
+      ],
     ],
     experiments: {
       typedRoutes: true,

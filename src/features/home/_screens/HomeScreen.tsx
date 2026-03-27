@@ -23,10 +23,10 @@ export const HomeScreen = () => {
     <Box bg="primary" className="flex-1">
       {/* Navigation header */}
       <Box
-        className="flex-row items-center justify-between px-16 pb-8"
-        style={{ paddingTop: insets.top + 8 }}
+        className="flex-row items-center justify-between"
+        style={{ paddingHorizontal: 16, paddingBottom: 8, paddingTop: insets.top + 8 }}
       >
-        <Box className="flex-row items-center gap-6">
+        <Box className="flex-row items-center" style={{ gap: 6 }}>
           <Ionicons name="star" size={18} color="#B6573A" />
           <Text variant="heading" size="sm" color="primary">
             Gitstar
@@ -50,7 +50,8 @@ export const HomeScreen = () => {
           variant="body"
           size="xs"
           color="secondary"
-          className="text-center py-32"
+          className="text-center"
+          style={{ paddingVertical: 32 }}
         >
           You've reached the end
         </Text>

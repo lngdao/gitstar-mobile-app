@@ -20,7 +20,7 @@ export const ActionButton = ({ icon, count, onPress }: ActionButtonProps) => {
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={0.6}
-      className="flex-row items-center gap-5"
+      style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}
     >
       <Ionicons name={icon} size={15} color="#A1A1A1" />
       <Text variant="body" size="xs" color="secondary">

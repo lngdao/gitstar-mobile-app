@@ -15,54 +15,54 @@ export const FeedCard = ({ event }: FeedCardProps) => {
   return (
     <View>
       {/* Author row */}
-      <Box className="flex-row items-center px-16 pt-14">
+      <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingTop: 14 }}>
         <Avatar login={event.author.login} />
 
-        <Box className="ml-8 flex-1">
-          <Box className="flex-row items-center gap-4">
+        <View style={{ marginLeft: 8, flex: 1 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
             <Text variant="label" size="sm" color="primary">
               {event.author.displayName}
             </Text>
             <Text variant="body" size="xs" color="secondary">
               @{event.author.login}
             </Text>
-          </Box>
-          <Box className="flex-row items-center gap-4 mt-2">
+          </View>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 2 }}>
             <RepoBadge owner={event.repoOwner} name={event.repoName} />
             <Text variant="body" size="xs" color="secondary">·</Text>
             <Text variant="body" size="xs" color="secondary">{event.timeAgo}</Text>
-          </Box>
-        </Box>
+          </View>
+        </View>
 
         <EventTypeBadge type={event.type} />
-      </Box>
+      </View>
 
       {/* Content */}
-      <Box className="px-16 pt-10 pb-12">
+      <View style={{ paddingHorizontal: 16, paddingTop: 10, paddingBottom: 12 }}>
         <Text variant="label" size="sm" color="primary" numberOfLines={2}>
           {event.title}
         </Text>
         {event.body.length > 0 && (
-          <Text variant="body" size="sm" color="secondary" numberOfLines={3} className="mt-6">
+          <Text variant="body" size="sm" color="secondary" numberOfLines={3} style={{ marginTop: 6 }}>
             {event.body}
           </Text>
         )}
-      </Box>
+      </View>
 
       {/* Action bar */}
-      <Box className="flex-row items-center px-16 pb-14">
+      <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingBottom: 14 }}>
         <ActionButton icon="heart-outline" count={event.likeCount} />
-        <Box className="ml-24">
+        <View style={{ marginLeft: 24 }}>
           <ActionButton icon="chatbubble-outline" count={event.commentCount} />
-        </Box>
-        <Box className="flex-1" />
+        </View>
+        <View style={{ flex: 1 }} />
         <TouchableOpacity activeOpacity={0.6}>
           <Ionicons name="bookmark-outline" size={16} color="#A1A1A1" />
         </TouchableOpacity>
-      </Box>
+      </View>
 
       {/* Divider */}
-      <View className="ml-16 h-[0.5px] bg-border-primary" />
+      <View style={{ marginLeft: 16, height: 0.5 }} className="bg-border-primary" />
     </View>
   );
 };

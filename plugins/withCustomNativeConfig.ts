@@ -111,6 +111,7 @@ const withCustomNativeConfig: ConfigPlugin = (config) => {
         "        puts '✅ Patched fmt/base.h: disabled FMT_USE_CONSTEVAL for Xcode 26.4'",
         '      end',
         '    end',
+        '',
       ].join('\n');
 
       // Insert before the closing `end` of post_install block

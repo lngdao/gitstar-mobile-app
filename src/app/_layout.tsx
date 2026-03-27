@@ -1,5 +1,4 @@
 import { Application } from '@/shared/providers';
-import { downloadUpdate } from '@/utils/updates';
 import { useFonts } from 'expo-font';
 import * as NavigationBar from 'expo-navigation-bar';
 import { Stack } from 'expo-router';
@@ -29,7 +28,6 @@ export default function RootLayout() {
       NavigationBar.setVisibilityAsync('hidden');
       NavigationBar.setBehaviorAsync('inset-swipe');
     }
-    downloadUpdate().catch(() => {});
   }, []);
 
   const backPressCountRef = useRef(0);
